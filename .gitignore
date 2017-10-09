@@ -56,3 +56,5 @@ yarn-error.log
 
 # project
 temp
+.publish
+demo/*.min.js
