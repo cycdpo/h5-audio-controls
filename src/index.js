@@ -1,4 +1,5 @@
 import _style from './audio.scss';
+import isString from 'awesome-js-funcs/judgeBasic/isString'
 
 /**
  * H5AudioControls
@@ -11,6 +12,8 @@ import _style from './audio.scss';
  * config: {
  *   context
  *   position
+ *   buttonSize
+ *   picSize
  * }
  * audioElement: {
  *   audioButton
@@ -32,12 +35,16 @@ export default class H5AudioControls {
   constructor(audioSrc, {
     context = document.body,
     position = 'top-right',
+    buttonSize = '',
+    picSize = '',
   } = {}) {
     this.config = {
       context: isString(context)
         ? document.querySelector(context)
         : context,
       position: position,
+      buttonSize: isString(buttonSize) ? buttonSize : buttonSize + 'px',
+      picSize: isString(picSize) ? picSize : picSize + 'px',
     };
 
     this.config.context.style.position = 'relative';
@@ -56,6 +63,8 @@ export default class H5AudioControls {
       this.audioElement.audioButton.href = 'javascript:;';
       this.audioElement.audioButton.classList.add(_style.musicControlWrapper, this.config.position);
 
+      this._initButtonSize();
+
       this.audioElement.audioButton.innerHTML = `
         <span class=${_style.musicControl} ${_style.play}>
           <audio style="display: none;" loop preload controls>
@@ -65,14 +74,14 @@ export default class H5AudioControls {
       `;
 
       this.config.context.appendChild(this.audioElement.audioButton);
-
       this.audioElement.audioPic = this.audioElement.audioButton.querySelector('.' + _style.musicControl);
       this.audioElement.audio = this.audioElement.audioPic.querySelector('audio');
 
+      this._initAudioPic();
       this._runAutoPlay();
       this.eventBind();
 
-      setTimeout(() => resolve(), 0);
+      setTimeout(resolve, 0);
     });
 
   };
@@ -90,6 +99,27 @@ export default class H5AudioControls {
       }
     });
   };
+
+  _initButtonSize() {
+    if (!this.config.buttonSize) {
+      let
+        shortW = window.innerWidth > window.innerHeight
+          ? window.innerHeight
+          : window.innerWidth
+      ;
+      this.config.buttonSize = shortW * .15 + 'px';
+    }
+
+    this.audioElement.audioButton.style.cssText = 'width: ' + this.config.buttonSize
+      + '; height: ' + this.config.buttonSize;
+  };
+
+  _initAudioPic() {
+    if (this.config.picSize) {
+      this.audioElement.audioPic.style.cssText = 'width: ' + this.config.picSize
+        + '; height: ' + this.config.picSize;
+    }
+  }
 
   _runAutoPlay() {
     this.play();
@@ -134,9 +164,3 @@ export default class H5AudioControls {
   };
 };
 
-// private
-let
-  isString = (str) => {
-    return (typeof str === 'string') && str.constructor === String;
-  }
-;
