@@ -7,7 +7,7 @@
 		exports["H5AudioControls"] = factory();
 	else
 		root["H5AudioControls"] = factory();
-})(this, function() {
+})(typeof self !== 'undefined' ? self : this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -81,7 +81,9 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__audio_scss__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__audio_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__audio_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_awesome_js_funcs_judgeBasic_isString__ = __webpack_require__(9);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 
 
 
@@ -96,6 +98,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * config: {
  *   context
  *   position
+ *   buttonSize
+ *   picSize
  * }
  * audioElement: {
  *   audioButton
@@ -120,13 +124,19 @@ var H5AudioControls = function () {
         _ref$context = _ref.context,
         context = _ref$context === undefined ? document.body : _ref$context,
         _ref$position = _ref.position,
-        position = _ref$position === undefined ? 'top-right' : _ref$position;
+        position = _ref$position === undefined ? 'top-right' : _ref$position,
+        _ref$buttonSize = _ref.buttonSize,
+        buttonSize = _ref$buttonSize === undefined ? '' : _ref$buttonSize,
+        _ref$picSize = _ref.picSize,
+        picSize = _ref$picSize === undefined ? '' : _ref$picSize;
 
     _classCallCheck(this, H5AudioControls);
 
     this.config = {
-      context: isString(context) ? document.querySelector(context) : context,
-      position: position
+      context: Object(__WEBPACK_IMPORTED_MODULE_1_awesome_js_funcs_judgeBasic_isString__["a" /* default */])(context) ? document.querySelector(context) : context,
+      position: position,
+      buttonSize: Object(__WEBPACK_IMPORTED_MODULE_1_awesome_js_funcs_judgeBasic_isString__["a" /* default */])(buttonSize) ? buttonSize : buttonSize + 'px',
+      picSize: Object(__WEBPACK_IMPORTED_MODULE_1_awesome_js_funcs_judgeBasic_isString__["a" /* default */])(picSize) ? picSize : picSize + 'px'
     };
 
     this.config.context.style.position = 'relative';
@@ -146,19 +156,19 @@ var H5AudioControls = function () {
       _this.audioElement.audioButton.href = 'javascript:;';
       _this.audioElement.audioButton.classList.add(__WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.musicControlWrapper, _this.config.position);
 
+      _this._initButtonSize();
+
       _this.audioElement.audioButton.innerHTML = '\n        <span class=' + __WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.musicControl + ' ' + __WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.play + '>\n          <audio style="display: none;" loop preload controls>\n            <source src=' + _this.audioSrc + ' type="audio/mpeg">\n          </audio>\n        </span>\n      ';
 
       _this.config.context.appendChild(_this.audioElement.audioButton);
-
       _this.audioElement.audioPic = _this.audioElement.audioButton.querySelector('.' + __WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.musicControl);
       _this.audioElement.audio = _this.audioElement.audioPic.querySelector('audio');
 
+      _this._initAudioPic();
       _this._runAutoPlay();
       _this.eventBind();
 
-      setTimeout(function () {
-        return resolve();
-      }, 0);
+      setTimeout(resolve, 0);
     });
   };
 
@@ -176,6 +186,21 @@ var H5AudioControls = function () {
         _this2.play();
       }
     });
+  };
+
+  H5AudioControls.prototype._initButtonSize = function _initButtonSize() {
+    if (!this.config.buttonSize) {
+      var shortW = window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth;
+      this.config.buttonSize = shortW * .15 + 'px';
+    }
+
+    this.audioElement.audioButton.style.cssText = 'width: ' + this.config.buttonSize + '; height: ' + this.config.buttonSize;
+  };
+
+  H5AudioControls.prototype._initAudioPic = function _initAudioPic() {
+    if (this.config.picSize) {
+      this.audioElement.audioPic.style.cssText = 'width: ' + this.config.picSize + '; height: ' + this.config.picSize;
+    }
   };
 
   H5AudioControls.prototype._runAutoPlay = function _runAutoPlay() {
@@ -236,11 +261,6 @@ var H5AudioControls = function () {
 /* harmony default export */ __webpack_exports__["default"] = (H5AudioControls);
 ;
 
-// private
-var isString = function isString(str) {
-  return typeof str === 'string' && str.constructor === String;
-};
-
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -256,7 +276,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(7)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -276,12 +296,13 @@ if(false) {
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(undefined);
+var escape = __webpack_require__(3);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".src-audio__musicControlWrapper {\n  position: absolute;\n  z-index: 999;\n  width: 15vw;\n  height: 15vw;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.src-audio__musicControlWrapper.left-top {\n  left: 0;\n  top: 0;\n}\n\n.src-audio__musicControlWrapper.top-right {\n  top: 0;\n  right: 0;\n}\n\n.src-audio__musicControlWrapper.right-bottom {\n  right: 0;\n  bottom: 0;\n}\n\n.src-audio__musicControlWrapper.left-bottom {\n  left: 0;\n  bottom: 0;\n}\n\n@keyframes src-audio__reverseRotataZ {\n  from {\n    transform: rotateZ(0deg);\n  }\n  to {\n    transform: rotateZ(-360deg);\n  }\n}\n\n.src-audio__musicControl {\n  display: block;\n  width: 9vw;\n  height: 9vw;\n}\n\n.src-audio__musicControl.src-audio__play {\n  background: url(" + __webpack_require__(4) + ") no-repeat;\n  background-size: 100% 100%;\n  animation: src-audio__reverseRotataZ 2s linear infinite;\n}\n\n.src-audio__musicControl.src-audio__pause {\n  background: url(" + __webpack_require__(5) + ") no-repeat;\n  background-size: 100% 100%;\n}\n", ""]);
+exports.push([module.i, ".src-audio__musicControlWrapper {\n  position: absolute;\n  z-index: 999;\n  width: 15vw;\n  height: 15vw;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.src-audio__musicControlWrapper.left-top {\n  left: 0;\n  top: 0;\n}\n\n.src-audio__musicControlWrapper.top-right {\n  top: 0;\n  right: 0;\n}\n\n.src-audio__musicControlWrapper.right-bottom {\n  right: 0;\n  bottom: 0;\n}\n\n.src-audio__musicControlWrapper.left-bottom {\n  left: 0;\n  bottom: 0;\n}\n\n@keyframes src-audio__reverseRotataZ {\n  from {\n    transform: rotateZ(0deg);\n  }\n  to {\n    transform: rotateZ(-360deg);\n  }\n}\n\n.src-audio__musicControl {\n  display: block;\n  width: 60%;\n  height: 60%;\n}\n\n.src-audio__musicControl.src-audio__play {\n  background: url(" + escape(__webpack_require__(5)) + ") no-repeat;\n  background-size: 100% 100%;\n  animation: src-audio__reverseRotataZ 2s linear infinite;\n}\n\n.src-audio__musicControl.src-audio__pause {\n  background: url(" + escape(__webpack_require__(6)) + ") no-repeat;\n  background-size: 100% 100%;\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -294,6 +315,28 @@ exports.locals = {
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports) {
+
+module.exports = function escape(url) {
+    if (typeof url !== 'string') {
+        return url
+    }
+    // If url is already wrapped in quotes, remove them
+    if (/^['"].*['"]$/.test(url)) {
+        url = url.slice(1, -1);
+    }
+    // Should url be wrapped?
+    // See https://drafts.csswg.org/css-values-3/#urls
+    if (/["'() \t\n]/.test(url)) {
+        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
+    }
+
+    return url
+}
+
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports) {
 
 /*
@@ -375,19 +418,19 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNjQgNjQiPg0KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCgkuc3Qwe29wYWNpdHk6MC4yO2ZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO30NCgkuc3Qxe2ZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO2ZpbGw6I0ZGRkZGRjt9DQo8L3N0eWxlPg0KPGc+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTMyLDIuOEMxNS45LDIuOCwyLjgsMTUuOSwyLjgsMzJTMTUuOSw2MS4yLDMyLDYxLjJTNjEuMiw0OC4xLDYxLjIsMzJTNDguMSwyLjgsMzIsMi44TDMyLDIuOHoiLz4NCgk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMzIsMEMxNC4zLDAsMCwxNC4zLDAsMzJzMTQuMywzMiwzMiwzMnMzMi0xNC4zLDMyLTMyUzQ5LjcsMCwzMiwweiBNMzIsNjEuMkMxNS45LDYxLjIsMi44LDQ4LjEsMi44LDMyDQoJCVMxNS45LDIuOCwzMiwyLjhTNjEuMiwxNS45LDYxLjIsMzJTNDguMSw2MS4yLDMyLDYxLjJ6Ii8+DQoJPHBhdGggY2xhc3M9InN0MSIgZD0iTTMwLjMsMTEuMmwtMi4xLDAuNkwzNi4xLDM5Yy01LjYtMC44LTEwLjUsNC0xMC4xLDguN2MwLjEsMS42LDEuMywyLjksMiwzLjVjNCwzLjQsOS40LTAuMiwxMS4zLTUuNw0KCQljMC44LTIuMywwLjQtNC0wLjgtOC4xbC00LjktMTYuOWMyLjUtMC44LDcuNywxLDkuNCwzLjVjMS4xLDEuNiwxLjgsMy45LDEuNCw1LjhjLTAuMSwwLjUtMC40LDIsMCwxLjdjMC43LTAuNiwwLjktMS4yLDEuMy0yLjQNCgkJYzAuMy0xLjEsMC40LTIuNywwLjMtMy43QzQ0LjQsMTUuNCwzMy4zLDE4LjMsMzAuMywxMS4yTDMwLjMsMTEuMnoiLz4NCjwvZz4NCjwvc3ZnPg0K"
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Ig0KICAgICB2aWV3Qm94PSIwIDAgNjQgNjQiPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KICAgIC5zdDB7b3BhY2l0eTowLjI7ZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7fQ0KICAgIC5zdDF7ZmlsbDojRkZGRkZGO30NCiAgICAuc3Qye2ZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO2ZpbGw6I0ZGRkZGRjt9DQogIDwvc3R5bGU+DQogIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0zMiwyLjhDMTUuOSwyLjgsMi44LDE1LjksMi44LDMyUzE1LjksNjEuMiwzMiw2MS4yUzYxLjIsNDguMSw2MS4yLDMyUzQ4LjEsMi44LDMyLDIuOEwzMiwyLjh6Ii8+DQogIDxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0zMiwwQzE0LjMsMCwwLDE0LjMsMCwzMnMxNC4zLDMyLDMyLDMyczMyLTE0LjMsMzItMzJTNDkuNywwLDMyLDB6IE0yLjgsMzJDMi44LDE1LjksMTUuOSwyLjgsMzIsMi44DQoJYzcuNywwLDE0LjYsMywxOS45LDcuOEwxMC42LDUxLjlDNS43LDQ2LjYsMi44LDM5LjcsMi44LDMyeiBNMzIsNjEuMmMtNy43LDAtMTQuNi0zLTE5LjktNy44bDQxLjMtNDEuM2M0LjgsNS4yLDcuOCwxMi4yLDcuOCwxOS45DQoJQzYxLjIsNDguMSw0OC4xLDYxLjIsMzIsNjEuMnoiLz4NCiAgPHBhdGggY2xhc3M9InN0MiIgZD0iTTMwLjMsMTEuMmwtMi4xLDAuNkwzNi4xLDM5Yy01LjYtMC44LTEwLjUsNC0xMC4xLDguN2MwLjEsMS42LDEuMywyLjksMiwzLjVjNCwzLjQsOS40LTAuMiwxMS4zLTUuNw0KCWMwLjgtMi4zLDAuNC00LTAuOC04LjFsLTQuOS0xNi45YzIuNS0wLjgsNy43LDEsOS40LDMuNWMxLjEsMS42LDEuOCwzLjksMS40LDUuOGMtMC4xLDAuNS0wLjQsMiwwLDEuN2MwLjctMC42LDAuOS0xLjIsMS4zLTIuNA0KCWMwLjMtMS4xLDAuNC0yLjcsMC4zLTMuN0M0NC40LDE1LjQsMzMuMywxOC4zLDMwLjMsMTEuMkwzMC4zLDExLjJ6Ii8+DQo8L3N2Zz4NCg=="
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -443,7 +486,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(7);
+var	fixUrls = __webpack_require__(8);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -456,7 +499,7 @@ module.exports = function(list, options) {
 
 	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
 	// tags it will allow on a page
-	if (!options.singleton) options.singleton = isOldIE();
+	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
 
 	// By default, add <style> tags to the <head> element
 	if (!options.insertInto) options.insertInto = "head";
@@ -759,7 +802,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 
@@ -852,6 +895,20 @@ module.exports = function (css) {
 	return fixedCss;
 };
 
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * 判断是否字符串
+ * @param str
+ * @returns {boolean}
+ */
+/* harmony default export */ __webpack_exports__["a"] = (function (str) {
+  return typeof str === 'string' && str.constructor === String;
+});
 
 /***/ })
 /******/ ])["default"];

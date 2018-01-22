@@ -55,6 +55,8 @@
       * `'top-right'`(Default)
       * `'right-bottom'`
       * `'left-bottom'`
+  * `buttonSize`: [string|number] Set button wrapper size. Default `''`
+  * `picSize`: [string|number] Set button picture size. Default `''`
 
 * `H5AudioControls` instance supports the following methods:
   * `load()`: init controller.

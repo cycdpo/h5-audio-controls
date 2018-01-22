@@ -55,6 +55,5 @@ npm-debug.log
 yarn-error.log
 
 # project
-.publish
 dist
 temp
