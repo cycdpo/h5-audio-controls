@@ -1,5 +1,5 @@
 import _style from './audio.scss';
-import isString from 'awesome-js-funcs/judgeBasic/isString'
+import isString from 'awesome-js-funcs/judgeBasic/isString';
 
 /**
  * H5AudioControls
