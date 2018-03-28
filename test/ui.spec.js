@@ -4,7 +4,7 @@ describe('ui spec', () => {
   const
     audioContext = document.createElement('div')
     ,
-    audioSrc = 'https://raw.githubusercontent.com/cycjimmy/staticFiles/storage/media/Richard_Clayderman-LOVE_IS_BLUE.mp3'
+    audioSrc = 'https://cycjimmy.github.io/staticFiles/media/Richard_Clayderman-LOVE_IS_BLUE.mp3'
   ;
 
   audioContext.id = 'audioContext';
