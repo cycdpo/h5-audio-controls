@@ -78,6 +78,6 @@
 ## CDN
 To use via a CDN include this in your html:
 ```text
-<script src="https://cdn.jsdelivr.net/npm/h5-audio-controls@1.0.0/build/H5AudioControls.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/h5-audio-controls@1/build/H5AudioControls.min.js"></script>
 ```
 
