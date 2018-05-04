@@ -7,7 +7,7 @@
 		exports["H5AudioControls"] = factory();
 	else
 		root["H5AudioControls"] = factory();
-})(typeof self !== 'undefined' ? self : this, function() {
+})(window, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -54,6 +54,11 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		}
 /******/ 	};
 /******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
 /******/ 	__webpack_require__.n = function(module) {
 /******/ 		var getter = module && module.__esModule ?
@@ -69,6 +74,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
@@ -78,10 +84,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__audio_scss__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__audio_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__audio_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_awesome_js_funcs_judgeBasic_isString__ = __webpack_require__(9);
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _audio_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _audio_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_audio_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 
@@ -133,10 +139,10 @@ var H5AudioControls = function () {
     _classCallCheck(this, H5AudioControls);
 
     this.config = {
-      context: Object(__WEBPACK_IMPORTED_MODULE_1_awesome_js_funcs_judgeBasic_isString__["a" /* default */])(context) ? document.querySelector(context) : context,
+      context: Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__["default"])(context) ? document.querySelector(context) : context,
       position: position,
-      buttonSize: Object(__WEBPACK_IMPORTED_MODULE_1_awesome_js_funcs_judgeBasic_isString__["a" /* default */])(buttonSize) ? buttonSize : buttonSize + 'px',
-      picSize: Object(__WEBPACK_IMPORTED_MODULE_1_awesome_js_funcs_judgeBasic_isString__["a" /* default */])(picSize) ? picSize : picSize + 'px'
+      buttonSize: Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__["default"])(buttonSize) ? buttonSize : buttonSize + 'px',
+      picSize: Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__["default"])(picSize) ? picSize : picSize + 'px'
     };
 
     this.config.context.style.position = 'relative';
@@ -154,14 +160,14 @@ var H5AudioControls = function () {
 
     return new Promise(function (resolve) {
       _this.audioElement.audioButton.href = 'javascript:;';
-      _this.audioElement.audioButton.classList.add(__WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.musicControlWrapper, _this.config.position);
+      _this.audioElement.audioButton.classList.add(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.musicControlWrapper, _this.config.position);
 
       _this._initButtonSize();
 
-      _this.audioElement.audioButton.innerHTML = '\n        <span class=' + __WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.musicControl + ' ' + __WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.play + '>\n          <audio style="display: none;" loop preload controls>\n            <source src=' + _this.audioSrc + ' type="audio/mpeg">\n          </audio>\n        </span>\n      ';
+      _this.audioElement.audioButton.innerHTML = '\n        <span class=' + _audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.musicControl + ' ' + _audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.play + '>\n          <audio style="display: none;" loop preload controls>\n            <source src=' + _this.audioSrc + ' type="audio/mpeg">\n          </audio>\n        </span>\n      ';
 
       _this.config.context.appendChild(_this.audioElement.audioButton);
-      _this.audioElement.audioPic = _this.audioElement.audioButton.querySelector('.' + __WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.musicControl);
+      _this.audioElement.audioPic = _this.audioElement.audioButton.querySelector('.' + _audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.musicControl);
       _this.audioElement.audio = _this.audioElement.audioPic.querySelector('audio');
 
       _this._initAudioPic();
@@ -178,7 +184,7 @@ var H5AudioControls = function () {
     this.audioElement.audioButton.addEventListener('click', function (e) {
       e.stopPropagation();
 
-      if (_this2.audioElement.audioPic.classList.contains(__WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.play)) {
+      if (_this2.audioElement.audioPic.classList.contains(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.play)) {
         // 正在播放
         _this2.pause();
       } else {
@@ -234,13 +240,13 @@ var H5AudioControls = function () {
   };
 
   H5AudioControls.prototype._changeUIToPlay = function _changeUIToPlay() {
-    this.audioElement.audioPic.classList.remove(__WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.pause);
-    this.audioElement.audioPic.classList.add(__WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.play);
+    this.audioElement.audioPic.classList.remove(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.pause);
+    this.audioElement.audioPic.classList.add(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.play);
   };
 
   H5AudioControls.prototype._changeUIToPause = function _changeUIToPause() {
-    this.audioElement.audioPic.classList.remove(__WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.play);
-    this.audioElement.audioPic.classList.add(__WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.pause);
+    this.audioElement.audioPic.classList.remove(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.play);
+    this.audioElement.audioPic.classList.add(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.pause);
   };
 
   H5AudioControls.prototype._changeUI = function _changeUI() {
@@ -284,32 +290,7 @@ var update = __webpack_require__(7)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
-if(false) {
-	module.hot.accept("!!../node_modules/css-loader/index.js??ref--1-1!../node_modules/sass-loader/lib/loader.js??ref--1-2!./audio.scss", function() {
-		var newContent = require("!!../node_modules/css-loader/index.js??ref--1-1!../node_modules/sass-loader/lib/loader.js??ref--1-2!./audio.scss");
-
-		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-
-		var locals = (function(a, b) {
-			var key, idx = 0;
-
-			for(key in a) {
-				if(!b || a[key] !== b[key]) return false;
-				idx++;
-			}
-
-			for(key in b) idx--;
-
-			return idx === 0;
-		}(content.locals, newContent.locals));
-
-		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
-
-		update(newContent);
-	});
-
-	module.hot.dispose(function() { update(); });
-}
+if(false) {}
 
 /***/ }),
 /* 2 */
@@ -655,7 +636,9 @@ function removeStyleElement (style) {
 function createStyleElement (options) {
 	var style = document.createElement("style");
 
-	options.attrs.type = "text/css";
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
 
 	addAttrs(style, options.attrs);
 	insertStyleElement(options, style);
@@ -666,7 +649,9 @@ function createStyleElement (options) {
 function createLinkElement (options) {
 	var link = document.createElement("link");
 
-	options.attrs.type = "text/css";
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
 	options.attrs.rel = "stylesheet";
 
 	addAttrs(link, options.attrs);
@@ -930,12 +915,13 @@ module.exports = function (css) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
 /**
  * 判断是否字符串
  * @param str
  * @returns {boolean}
  */
-/* harmony default export */ __webpack_exports__["a"] = (function (str) {
+/* harmony default export */ __webpack_exports__["default"] = (function (str) {
   return typeof str === 'string' && str.constructor === String;
 });
 

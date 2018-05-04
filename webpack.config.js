@@ -16,6 +16,7 @@ var
 
 
 var config = {
+  mode: 'none',
   entry: path.resolve('src', 'index.js'),
 
   output: {
@@ -43,6 +44,7 @@ var config = {
       // Scripts
       {
         test: /\.js$/,
+        type: 'javascript/auto',
         include: [
           path.resolve('src')
         ],
@@ -120,6 +122,7 @@ var config = {
 // dev mode
 if (IS_DEVELOPMENT) {
   // devtool
+  config.mode = 'development';
   config.devtool = 'source-map';
 
   config.plugins.push(
@@ -146,6 +149,8 @@ if (IS_DEVELOPMENT) {
 
 // production mode
 if (IS_PRODUCTION) {
+  config.mode = 'production';
+
   config.plugins.push(
     new CleanWebpackPlugin(['build'], {
       root: path.resolve('./'),
