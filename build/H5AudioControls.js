@@ -1,3 +1,8 @@
+/*!
+ * h5-audio-controls v1.1.1
+ * Homepage: https://github.com/cycdpo/h5-audio-controls#readme
+ * Released under the MIT License.
+ */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -46,17 +51,32 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
 /******/ 		}
 /******/ 	};
 /******/
 /******/ 	// define __esModule on exports
 /******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
 /******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -85,12 +105,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return H5AudioControls; });
 /* harmony import */ var _audio_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _audio_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_audio_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-
 
 
 /**
@@ -124,19 +142,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * _changeUIToPause
  */
 
-var H5AudioControls = function () {
-  function H5AudioControls(audioSrc) {
-    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+var H5AudioControls =
+/*#__PURE__*/
+function () {
+  function H5AudioControls(audioSrc, _temp) {
+    var _ref = _temp === void 0 ? {} : _temp,
         _ref$context = _ref.context,
-        context = _ref$context === undefined ? document.body : _ref$context,
+        context = _ref$context === void 0 ? document.body : _ref$context,
         _ref$position = _ref.position,
-        position = _ref$position === undefined ? 'top-right' : _ref$position,
+        position = _ref$position === void 0 ? 'top-right' : _ref$position,
         _ref$buttonSize = _ref.buttonSize,
-        buttonSize = _ref$buttonSize === undefined ? '' : _ref$buttonSize,
+        buttonSize = _ref$buttonSize === void 0 ? '' : _ref$buttonSize,
         _ref$picSize = _ref.picSize,
-        picSize = _ref$picSize === undefined ? '' : _ref$picSize;
-
-    _classCallCheck(this, H5AudioControls);
+        picSize = _ref$picSize === void 0 ? '' : _ref$picSize;
 
     this.config = {
       context: Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__["default"])(context) ? document.querySelector(context) : context,
@@ -144,10 +162,8 @@ var H5AudioControls = function () {
       buttonSize: Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__["default"])(buttonSize) ? buttonSize : buttonSize + 'px',
       picSize: Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__["default"])(picSize) ? picSize : picSize + 'px'
     };
-
     this.config.context.style.position = 'relative';
     this.audioSrc = audioSrc;
-
     this.audioElement = {
       audioButton: document.createElement('a'),
       audio: null,
@@ -155,30 +171,36 @@ var H5AudioControls = function () {
     };
   }
 
-  H5AudioControls.prototype.load = function load() {
+  var _proto = H5AudioControls.prototype;
+
+  _proto.load = function load() {
     var _this = this;
 
     return new Promise(function (resolve) {
       _this.audioElement.audioButton.href = 'javascript:;';
+
       _this.audioElement.audioButton.classList.add(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.musicControlWrapper, _this.config.position);
 
       _this._initButtonSize();
 
-      _this.audioElement.audioButton.innerHTML = '\n        <span class=' + _audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.musicControl + ' ' + _audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.play + '>\n          <audio style="display: none;" loop preload controls>\n            <source src=' + _this.audioSrc + ' type="audio/mpeg">\n          </audio>\n        </span>\n      ';
+      _this.audioElement.audioButton.innerHTML = "\n        <span class=" + _audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.musicControl + " " + _audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.play + ">\n          <audio style=\"display: none;\" loop preload controls>\n            <source src=" + _this.audioSrc + " type=\"audio/mpeg\">\n          </audio>\n        </span>\n      ";
 
       _this.config.context.appendChild(_this.audioElement.audioButton);
+
       _this.audioElement.audioPic = _this.audioElement.audioButton.querySelector('.' + _audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.musicControl);
       _this.audioElement.audio = _this.audioElement.audioPic.querySelector('audio');
 
       _this._initAudioPic();
+
       _this._runAutoPlay();
+
       _this.eventBind();
 
       setTimeout(resolve, 0);
     });
   };
 
-  H5AudioControls.prototype.eventBind = function eventBind() {
+  _proto.eventBind = function eventBind() {
     var _this2 = this;
 
     this.audioElement.audioButton.addEventListener('click', function (e) {
@@ -194,7 +216,7 @@ var H5AudioControls = function () {
     });
   };
 
-  H5AudioControls.prototype._initButtonSize = function _initButtonSize() {
+  _proto._initButtonSize = function _initButtonSize() {
     if (!this.config.buttonSize) {
       var shortW = window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth;
       this.config.buttonSize = shortW * .15 + 'px';
@@ -203,13 +225,13 @@ var H5AudioControls = function () {
     this.audioElement.audioButton.style.cssText = 'width: ' + this.config.buttonSize + '; height: ' + this.config.buttonSize;
   };
 
-  H5AudioControls.prototype._initAudioPic = function _initAudioPic() {
+  _proto._initAudioPic = function _initAudioPic() {
     if (this.config.picSize) {
       this.audioElement.audioPic.style.cssText = 'width: ' + this.config.picSize + '; height: ' + this.config.picSize;
     }
   };
 
-  H5AudioControls.prototype._runAutoPlay = function _runAutoPlay() {
+  _proto._runAutoPlay = function _runAutoPlay() {
     var _this3 = this;
 
     this.play();
@@ -221,7 +243,7 @@ var H5AudioControls = function () {
     }, false);
   };
 
-  H5AudioControls.prototype.play = function play() {
+  _proto.play = function play() {
     var _this4 = this;
 
     this.audioElement.audio.play();
@@ -230,7 +252,7 @@ var H5AudioControls = function () {
     }, 0);
   };
 
-  H5AudioControls.prototype.pause = function pause() {
+  _proto.pause = function pause() {
     var _this5 = this;
 
     this.audioElement.audio.pause();
@@ -239,17 +261,17 @@ var H5AudioControls = function () {
     }, 0);
   };
 
-  H5AudioControls.prototype._changeUIToPlay = function _changeUIToPlay() {
+  _proto._changeUIToPlay = function _changeUIToPlay() {
     this.audioElement.audioPic.classList.remove(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.pause);
     this.audioElement.audioPic.classList.add(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.play);
   };
 
-  H5AudioControls.prototype._changeUIToPause = function _changeUIToPause() {
+  _proto._changeUIToPause = function _changeUIToPause() {
     this.audioElement.audioPic.classList.remove(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.play);
     this.audioElement.audioPic.classList.add(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.pause);
   };
 
-  H5AudioControls.prototype._changeUI = function _changeUI() {
+  _proto._changeUI = function _changeUI() {
     if (this.isPlaying()) {
       this._changeUIToPlay();
     } else {
@@ -257,14 +279,14 @@ var H5AudioControls = function () {
     }
   };
 
-  H5AudioControls.prototype.isPlaying = function isPlaying() {
+  _proto.isPlaying = function isPlaying() {
     return !this.audioElement.audio.paused;
   };
 
   return H5AudioControls;
 }();
 
-/* harmony default export */ __webpack_exports__["default"] = (H5AudioControls);
+
 ;
 
 /***/ }),
@@ -458,14 +480,17 @@ var isOldIE = memoize(function () {
 	return window && document && document.all && !window.atob;
 });
 
-var getTarget = function (target) {
+var getTarget = function (target, parent) {
+  if (parent){
+    return parent.querySelector(target);
+  }
   return document.querySelector(target);
 };
 
 var getElement = (function (fn) {
 	var memo = {};
 
-	return function(target) {
+	return function(target, parent) {
                 // If passing function in options, then use it for resolve "head" element.
                 // Useful for Shadow Root style i.e
                 // {
@@ -475,7 +500,7 @@ var getElement = (function (fn) {
                         return target();
                 }
                 if (typeof memo[target] === "undefined") {
-			var styleTarget = getTarget.call(this, target);
+			var styleTarget = getTarget.call(this, target, parent);
 			// Special case to return head of iframe instead of iframe itself
 			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
 				try {
@@ -616,7 +641,7 @@ function insertStyleElement (options, style) {
 	} else if (options.insertAt === "bottom") {
 		target.appendChild(style);
 	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
-		var nextSibling = getElement(options.insertInto + " " + options.insertAt.before);
+		var nextSibling = getElement(options.insertAt.before, target);
 		target.insertBefore(style, nextSibling);
 	} else {
 		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
@@ -638,6 +663,13 @@ function createStyleElement (options) {
 
 	if(options.attrs.type === undefined) {
 		options.attrs.type = "text/css";
+	}
+
+	if(options.attrs.nonce === undefined) {
+		var nonce = getNonce();
+		if (nonce) {
+			options.attrs.nonce = nonce;
+		}
 	}
 
 	addAttrs(style, options.attrs);
@@ -664,6 +696,12 @@ function addAttrs (el, attrs) {
 	Object.keys(attrs).forEach(function (key) {
 		el.setAttribute(key, attrs[key]);
 	});
+}
+
+function getNonce() {
+	if (false) {}
+
+	return __webpack_require__.nc;
 }
 
 function addStyle (obj, options) {
