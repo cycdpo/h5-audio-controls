@@ -1,3 +1,8 @@
+/*!
+ * h5-audio-controls v1.1.1
+ * Homepage: https://github.com/cycdpo/h5-audio-controls#readme
+ * Released under the MIT License.
+ */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -7,7 +12,7 @@
 		exports["H5AudioControls"] = factory();
 	else
 		root["H5AudioControls"] = factory();
-})(typeof self !== 'undefined' ? self : this, function() {
+})(window, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -46,12 +51,32 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
 /******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -69,259 +94,47 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ "./node_modules/awesome-js-funcs/judgeBasic/isString.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/awesome-js-funcs/judgeBasic/isString.js ***!
+  \**************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__audio_scss__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__audio_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__audio_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_awesome_js_funcs_judgeBasic_isString__ = __webpack_require__(9);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-
-
-
+__webpack_require__.r(__webpack_exports__);
 /**
- * H5AudioControls
- * @param audioSrc
- * @param context default: body
- * @param position 'left-top'|'top-right'(default)|'right-bottom'|'left-bottom'
- *
- * Property:
- * audioSrc
- * config: {
- *   context
- *   position
- *   buttonSize
- *   picSize
- * }
- * audioElement: {
- *   audioButton
- *   audio
- *   audioPic
- * }
- *
- * Function:
- * load
- * play
- * pause
- * isPlaying
- * _runAutoPlay
- * _changeUI
- * _changeUIToPlay
- * _changeUIToPause
+ * 判断是否字符串
+ * @param str
+ * @returns {boolean}
  */
-
-var H5AudioControls = function () {
-  function H5AudioControls(audioSrc) {
-    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-        _ref$context = _ref.context,
-        context = _ref$context === undefined ? document.body : _ref$context,
-        _ref$position = _ref.position,
-        position = _ref$position === undefined ? 'top-right' : _ref$position,
-        _ref$buttonSize = _ref.buttonSize,
-        buttonSize = _ref$buttonSize === undefined ? '' : _ref$buttonSize,
-        _ref$picSize = _ref.picSize,
-        picSize = _ref$picSize === undefined ? '' : _ref$picSize;
-
-    _classCallCheck(this, H5AudioControls);
-
-    this.config = {
-      context: Object(__WEBPACK_IMPORTED_MODULE_1_awesome_js_funcs_judgeBasic_isString__["a" /* default */])(context) ? document.querySelector(context) : context,
-      position: position,
-      buttonSize: Object(__WEBPACK_IMPORTED_MODULE_1_awesome_js_funcs_judgeBasic_isString__["a" /* default */])(buttonSize) ? buttonSize : buttonSize + 'px',
-      picSize: Object(__WEBPACK_IMPORTED_MODULE_1_awesome_js_funcs_judgeBasic_isString__["a" /* default */])(picSize) ? picSize : picSize + 'px'
-    };
-
-    this.config.context.style.position = 'relative';
-    this.audioSrc = audioSrc;
-
-    this.audioElement = {
-      audioButton: document.createElement('a'),
-      audio: null,
-      audioPic: null
-    };
-  }
-
-  H5AudioControls.prototype.load = function load() {
-    var _this = this;
-
-    return new Promise(function (resolve) {
-      _this.audioElement.audioButton.href = 'javascript:;';
-      _this.audioElement.audioButton.classList.add(__WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.musicControlWrapper, _this.config.position);
-
-      _this._initButtonSize();
-
-      _this.audioElement.audioButton.innerHTML = '\n        <span class=' + __WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.musicControl + ' ' + __WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.play + '>\n          <audio style="display: none;" loop preload controls>\n            <source src=' + _this.audioSrc + ' type="audio/mpeg">\n          </audio>\n        </span>\n      ';
-
-      _this.config.context.appendChild(_this.audioElement.audioButton);
-      _this.audioElement.audioPic = _this.audioElement.audioButton.querySelector('.' + __WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.musicControl);
-      _this.audioElement.audio = _this.audioElement.audioPic.querySelector('audio');
-
-      _this._initAudioPic();
-      _this._runAutoPlay();
-      _this.eventBind();
-
-      setTimeout(resolve, 0);
-    });
-  };
-
-  H5AudioControls.prototype.eventBind = function eventBind() {
-    var _this2 = this;
-
-    this.audioElement.audioButton.addEventListener('click', function (e) {
-      e.stopPropagation();
-
-      if (_this2.audioElement.audioPic.classList.contains(__WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.play)) {
-        // 正在播放
-        _this2.pause();
-      } else {
-        // 暂停中
-        _this2.play();
-      }
-    });
-  };
-
-  H5AudioControls.prototype._initButtonSize = function _initButtonSize() {
-    if (!this.config.buttonSize) {
-      var shortW = window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth;
-      this.config.buttonSize = shortW * .15 + 'px';
-    }
-
-    this.audioElement.audioButton.style.cssText = 'width: ' + this.config.buttonSize + '; height: ' + this.config.buttonSize;
-  };
-
-  H5AudioControls.prototype._initAudioPic = function _initAudioPic() {
-    if (this.config.picSize) {
-      this.audioElement.audioPic.style.cssText = 'width: ' + this.config.picSize + '; height: ' + this.config.picSize;
-    }
-  };
-
-  H5AudioControls.prototype._runAutoPlay = function _runAutoPlay() {
-    var _this3 = this;
-
-    this.play();
-    document.addEventListener("WeixinJSBridgeReady", function () {
-      _this3.play();
-    }, false);
-    document.addEventListener('YixinJSBridgeReady', function () {
-      _this3.play();
-    }, false);
-  };
-
-  H5AudioControls.prototype.play = function play() {
-    var _this4 = this;
-
-    this.audioElement.audio.play();
-    setTimeout(function () {
-      return _this4._changeUI();
-    }, 0);
-  };
-
-  H5AudioControls.prototype.pause = function pause() {
-    var _this5 = this;
-
-    this.audioElement.audio.pause();
-    setTimeout(function () {
-      return _this5._changeUI();
-    }, 0);
-  };
-
-  H5AudioControls.prototype._changeUIToPlay = function _changeUIToPlay() {
-    this.audioElement.audioPic.classList.remove(__WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.pause);
-    this.audioElement.audioPic.classList.add(__WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.play);
-  };
-
-  H5AudioControls.prototype._changeUIToPause = function _changeUIToPause() {
-    this.audioElement.audioPic.classList.remove(__WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.play);
-    this.audioElement.audioPic.classList.add(__WEBPACK_IMPORTED_MODULE_0__audio_scss___default.a.pause);
-  };
-
-  H5AudioControls.prototype._changeUI = function _changeUI() {
-    if (this.isPlaying()) {
-      this._changeUIToPlay();
-    } else {
-      this._changeUIToPause();
-    }
-  };
-
-  H5AudioControls.prototype.isPlaying = function isPlaying() {
-    return !this.audioElement.audio.paused;
-  };
-
-  return H5AudioControls;
-}();
-
-/* harmony default export */ __webpack_exports__["default"] = (H5AudioControls);
-;
+/* harmony default export */ __webpack_exports__["default"] = (function (str) {
+  return typeof str === 'string' && str.constructor === String;
+});
 
 /***/ }),
-/* 1 */
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/sass-loader/lib/loader.js?!./src/audio.scss":
+/*!***************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--5-1!./node_modules/sass-loader/lib/loader.js??ref--5-2!./src/audio.scss ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-var content = __webpack_require__(2);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(7)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {
-	module.hot.accept("!!../node_modules/css-loader/index.js??ref--1-1!../node_modules/sass-loader/lib/loader.js??ref--1-2!./audio.scss", function() {
-		var newContent = require("!!../node_modules/css-loader/index.js??ref--1-1!../node_modules/sass-loader/lib/loader.js??ref--1-2!./audio.scss");
-
-		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-
-		var locals = (function(a, b) {
-			var key, idx = 0;
-
-			for(key in a) {
-				if(!b || a[key] !== b[key]) return false;
-				idx++;
-			}
-
-			for(key in b) idx--;
-
-			return idx === 0;
-		}(content.locals, newContent.locals));
-
-		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
-
-		update(newContent);
-	});
-
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var escape = __webpack_require__(3);
-exports = module.exports = __webpack_require__(4)(false);
+var escape = __webpack_require__(/*! ../node_modules/css-loader/lib/url/escape.js */ "./node_modules/css-loader/lib/url/escape.js");
+exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
 // imports
 
 
 // module
-exports.push([module.i, ".src-audio__musicControlWrapper {\n  position: absolute;\n  z-index: 999;\n  width: 15vw;\n  height: 15vw;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.src-audio__musicControlWrapper.left-top {\n  left: 0;\n  top: 0;\n}\n\n.src-audio__musicControlWrapper.top-right {\n  top: 0;\n  right: 0;\n}\n\n.src-audio__musicControlWrapper.right-bottom {\n  right: 0;\n  bottom: 0;\n}\n\n.src-audio__musicControlWrapper.left-bottom {\n  left: 0;\n  bottom: 0;\n}\n\n@keyframes src-audio__reverseRotataZ {\n  from {\n    transform: rotateZ(0deg);\n  }\n  to {\n    transform: rotateZ(-360deg);\n  }\n}\n\n.src-audio__musicControl {\n  display: block;\n  width: 60%;\n  height: 60%;\n}\n\n.src-audio__musicControl.src-audio__play {\n  background: url(" + escape(__webpack_require__(5)) + ") no-repeat;\n  background-size: 100% 100%;\n  animation: src-audio__reverseRotataZ 2s linear infinite;\n}\n\n.src-audio__musicControl.src-audio__pause {\n  background: url(" + escape(__webpack_require__(6)) + ") no-repeat;\n  background-size: 100% 100%;\n}\n", ""]);
+exports.push([module.i, ".src-audio__musicControlWrapper {\n  position: absolute;\n  z-index: 999;\n  width: 15vw;\n  height: 15vw;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.src-audio__musicControlWrapper.left-top {\n  left: 0;\n  top: 0;\n}\n\n.src-audio__musicControlWrapper.top-right {\n  top: 0;\n  right: 0;\n}\n\n.src-audio__musicControlWrapper.right-bottom {\n  right: 0;\n  bottom: 0;\n}\n\n.src-audio__musicControlWrapper.left-bottom {\n  left: 0;\n  bottom: 0;\n}\n\n@keyframes src-audio__reverseRotataZ {\n  from {\n    transform: rotateZ(0deg);\n  }\n  to {\n    transform: rotateZ(-360deg);\n  }\n}\n\n.src-audio__musicControl {\n  display: block;\n  width: 60%;\n  height: 60%;\n}\n\n.src-audio__musicControl.src-audio__play {\n  background: url(" + escape(__webpack_require__(/*! ./audioPlay.svg */ "./src/audioPlay.svg")) + ") no-repeat;\n  background-size: 100% 100%;\n  animation: src-audio__reverseRotataZ 2s linear infinite;\n}\n\n.src-audio__musicControl.src-audio__pause {\n  background: url(" + escape(__webpack_require__(/*! ./audioPause.svg */ "./src/audioPause.svg")) + ") no-repeat;\n  background-size: 100% 100%;\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -333,29 +146,12 @@ exports.locals = {
 };
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports) {
 
-module.exports = function escape(url) {
-    if (typeof url !== 'string') {
-        return url
-    }
-    // If url is already wrapped in quotes, remove them
-    if (/^['"].*['"]$/.test(url)) {
-        url = url.slice(1, -1);
-    }
-    // Should url be wrapped?
-    // See https://drafts.csswg.org/css-values-3/#urls
-    if (/["'() \t\n]/.test(url)) {
-        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
-    }
-
-    return url
-}
-
-
-/***/ }),
-/* 4 */
+/***/ "./node_modules/css-loader/lib/css-base.js":
+/*!*************************************************!*\
+  !*** ./node_modules/css-loader/lib/css-base.js ***!
+  \*************************************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
 /*
@@ -437,19 +233,39 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 5 */
+
+/***/ "./node_modules/css-loader/lib/url/escape.js":
+/*!***************************************************!*\
+  !*** ./node_modules/css-loader/lib/url/escape.js ***!
+  \***************************************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNjQgNjQiPg0KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCgkuc3Qwe29wYWNpdHk6MC4yO2ZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO30NCgkuc3Qxe2ZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO2ZpbGw6I0ZGRkZGRjt9DQo8L3N0eWxlPg0KPGc+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTMyLDIuOEMxNS45LDIuOCwyLjgsMTUuOSwyLjgsMzJTMTUuOSw2MS4yLDMyLDYxLjJTNjEuMiw0OC4xLDYxLjIsMzJTNDguMSwyLjgsMzIsMi44TDMyLDIuOHoiLz4NCgk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMzIsMEMxNC4zLDAsMCwxNC4zLDAsMzJzMTQuMywzMiwzMiwzMnMzMi0xNC4zLDMyLTMyUzQ5LjcsMCwzMiwweiBNMzIsNjEuMkMxNS45LDYxLjIsMi44LDQ4LjEsMi44LDMyDQoJCVMxNS45LDIuOCwzMiwyLjhTNjEuMiwxNS45LDYxLjIsMzJTNDguMSw2MS4yLDMyLDYxLjJ6Ii8+DQoJPHBhdGggY2xhc3M9InN0MSIgZD0iTTMwLjMsMTEuMmwtMi4xLDAuNkwzNi4xLDM5Yy01LjYtMC44LTEwLjUsNC0xMC4xLDguN2MwLjEsMS42LDEuMywyLjksMiwzLjVjNCwzLjQsOS40LTAuMiwxMS4zLTUuNw0KCQljMC44LTIuMywwLjQtNC0wLjgtOC4xbC00LjktMTYuOWMyLjUtMC44LDcuNywxLDkuNCwzLjVjMS4xLDEuNiwxLjgsMy45LDEuNCw1LjhjLTAuMSwwLjUtMC40LDIsMCwxLjdjMC43LTAuNiwwLjktMS4yLDEuMy0yLjQNCgkJYzAuMy0xLjEsMC40LTIuNywwLjMtMy43QzQ0LjQsMTUuNCwzMy4zLDE4LjMsMzAuMywxMS4yTDMwLjMsMTEuMnoiLz4NCjwvZz4NCjwvc3ZnPg0K"
+module.exports = function escape(url) {
+    if (typeof url !== 'string') {
+        return url
+    }
+    // If url is already wrapped in quotes, remove them
+    if (/^['"].*['"]$/.test(url)) {
+        url = url.slice(1, -1);
+    }
+    // Should url be wrapped?
+    // See https://drafts.csswg.org/css-values-3/#urls
+    if (/["'() \t\n]/.test(url)) {
+        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
+    }
+
+    return url
+}
+
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports) {
 
-module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Ig0KICAgICB2aWV3Qm94PSIwIDAgNjQgNjQiPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KICAgIC5zdDB7b3BhY2l0eTowLjI7ZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7fQ0KICAgIC5zdDF7ZmlsbDojRkZGRkZGO30NCiAgICAuc3Qye2ZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO2ZpbGw6I0ZGRkZGRjt9DQogIDwvc3R5bGU+DQogIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0zMiwyLjhDMTUuOSwyLjgsMi44LDE1LjksMi44LDMyUzE1LjksNjEuMiwzMiw2MS4yUzYxLjIsNDguMSw2MS4yLDMyUzQ4LjEsMi44LDMyLDIuOEwzMiwyLjh6Ii8+DQogIDxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0zMiwwQzE0LjMsMCwwLDE0LjMsMCwzMnMxNC4zLDMyLDMyLDMyczMyLTE0LjMsMzItMzJTNDkuNywwLDMyLDB6IE0yLjgsMzJDMi44LDE1LjksMTUuOSwyLjgsMzIsMi44DQoJYzcuNywwLDE0LjYsMywxOS45LDcuOEwxMC42LDUxLjlDNS43LDQ2LjYsMi44LDM5LjcsMi44LDMyeiBNMzIsNjEuMmMtNy43LDAtMTQuNi0zLTE5LjktNy44bDQxLjMtNDEuM2M0LjgsNS4yLDcuOCwxMi4yLDcuOCwxOS45DQoJQzYxLjIsNDguMSw0OC4xLDYxLjIsMzIsNjEuMnoiLz4NCiAgPHBhdGggY2xhc3M9InN0MiIgZD0iTTMwLjMsMTEuMmwtMi4xLDAuNkwzNi4xLDM5Yy01LjYtMC44LTEwLjUsNC0xMC4xLDguN2MwLjEsMS42LDEuMywyLjksMiwzLjVjNCwzLjQsOS40LTAuMiwxMS4zLTUuNw0KCWMwLjgtMi4zLDAuNC00LTAuOC04LjFsLTQuOS0xNi45YzIuNS0wLjgsNy43LDEsOS40LDMuNWMxLjEsMS42LDEuOCwzLjksMS40LDUuOGMtMC4xLDAuNS0wLjQsMiwwLDEuN2MwLjctMC42LDAuOS0xLjIsMS4zLTIuNA0KCWMwLjMtMS4xLDAuNC0yLjcsMC4zLTMuN0M0NC40LDE1LjQsMzMuMywxOC4zLDMwLjMsMTEuMkwzMC4zLDExLjJ6Ii8+DQo8L3N2Zz4NCg=="
-
-/***/ }),
-/* 7 */
+/***/ "./node_modules/style-loader/lib/addStyles.js":
+/*!****************************************************!*\
+  !*** ./node_modules/style-loader/lib/addStyles.js ***!
+  \****************************************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -477,14 +293,17 @@ var isOldIE = memoize(function () {
 	return window && document && document.all && !window.atob;
 });
 
-var getTarget = function (target) {
+var getTarget = function (target, parent) {
+  if (parent){
+    return parent.querySelector(target);
+  }
   return document.querySelector(target);
 };
 
 var getElement = (function (fn) {
 	var memo = {};
 
-	return function(target) {
+	return function(target, parent) {
                 // If passing function in options, then use it for resolve "head" element.
                 // Useful for Shadow Root style i.e
                 // {
@@ -494,7 +313,7 @@ var getElement = (function (fn) {
                         return target();
                 }
                 if (typeof memo[target] === "undefined") {
-			var styleTarget = getTarget.call(this, target);
+			var styleTarget = getTarget.call(this, target, parent);
 			// Special case to return head of iframe instead of iframe itself
 			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
 				try {
@@ -515,7 +334,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(8);
+var	fixUrls = __webpack_require__(/*! ./urls */ "./node_modules/style-loader/lib/urls.js");
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -635,7 +454,7 @@ function insertStyleElement (options, style) {
 	} else if (options.insertAt === "bottom") {
 		target.appendChild(style);
 	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
-		var nextSibling = getElement(options.insertInto + " " + options.insertAt.before);
+		var nextSibling = getElement(options.insertAt.before, target);
 		target.insertBefore(style, nextSibling);
 	} else {
 		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
@@ -655,7 +474,16 @@ function removeStyleElement (style) {
 function createStyleElement (options) {
 	var style = document.createElement("style");
 
-	options.attrs.type = "text/css";
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+
+	if(options.attrs.nonce === undefined) {
+		var nonce = getNonce();
+		if (nonce) {
+			options.attrs.nonce = nonce;
+		}
+	}
 
 	addAttrs(style, options.attrs);
 	insertStyleElement(options, style);
@@ -666,7 +494,9 @@ function createStyleElement (options) {
 function createLinkElement (options) {
 	var link = document.createElement("link");
 
-	options.attrs.type = "text/css";
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
 	options.attrs.rel = "stylesheet";
 
 	addAttrs(link, options.attrs);
@@ -679,6 +509,12 @@ function addAttrs (el, attrs) {
 	Object.keys(attrs).forEach(function (key) {
 		el.setAttribute(key, attrs[key]);
 	});
+}
+
+function getNonce() {
+	if (false) {}
+
+	return __webpack_require__.nc;
 }
 
 function addStyle (obj, options) {
@@ -831,7 +667,12 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 8 */
+
+/***/ "./node_modules/style-loader/lib/urls.js":
+/*!***********************************************!*\
+  !*** ./node_modules/style-loader/lib/urls.js ***!
+  \***********************************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
 
@@ -926,20 +767,254 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 9 */
+
+/***/ "./src/audio.scss":
+/*!************************!*\
+  !*** ./src/audio.scss ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../node_modules/css-loader??ref--5-1!../node_modules/sass-loader/lib/loader.js??ref--5-2!./audio.scss */ "./node_modules/css-loader/index.js?!./node_modules/sass-loader/lib/loader.js?!./src/audio.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/audioPause.svg":
+/*!****************************!*\
+  !*** ./src/audioPause.svg ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Ig0KICAgICB2aWV3Qm94PSIwIDAgNjQgNjQiPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KICAgIC5zdDB7b3BhY2l0eTowLjI7ZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7fQ0KICAgIC5zdDF7ZmlsbDojRkZGRkZGO30NCiAgICAuc3Qye2ZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO2ZpbGw6I0ZGRkZGRjt9DQogIDwvc3R5bGU+DQogIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0zMiwyLjhDMTUuOSwyLjgsMi44LDE1LjksMi44LDMyUzE1LjksNjEuMiwzMiw2MS4yUzYxLjIsNDguMSw2MS4yLDMyUzQ4LjEsMi44LDMyLDIuOEwzMiwyLjh6Ii8+DQogIDxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0zMiwwQzE0LjMsMCwwLDE0LjMsMCwzMnMxNC4zLDMyLDMyLDMyczMyLTE0LjMsMzItMzJTNDkuNywwLDMyLDB6IE0yLjgsMzJDMi44LDE1LjksMTUuOSwyLjgsMzIsMi44DQoJYzcuNywwLDE0LjYsMywxOS45LDcuOEwxMC42LDUxLjlDNS43LDQ2LjYsMi44LDM5LjcsMi44LDMyeiBNMzIsNjEuMmMtNy43LDAtMTQuNi0zLTE5LjktNy44bDQxLjMtNDEuM2M0LjgsNS4yLDcuOCwxMi4yLDcuOCwxOS45DQoJQzYxLjIsNDguMSw0OC4xLDYxLjIsMzIsNjEuMnoiLz4NCiAgPHBhdGggY2xhc3M9InN0MiIgZD0iTTMwLjMsMTEuMmwtMi4xLDAuNkwzNi4xLDM5Yy01LjYtMC44LTEwLjUsNC0xMC4xLDguN2MwLjEsMS42LDEuMywyLjksMiwzLjVjNCwzLjQsOS40LTAuMiwxMS4zLTUuNw0KCWMwLjgtMi4zLDAuNC00LTAuOC04LjFsLTQuOS0xNi45YzIuNS0wLjgsNy43LDEsOS40LDMuNWMxLjEsMS42LDEuOCwzLjksMS40LDUuOGMtMC4xLDAuNS0wLjQsMiwwLDEuN2MwLjctMC42LDAuOS0xLjIsMS4zLTIuNA0KCWMwLjMtMS4xLDAuNC0yLjcsMC4zLTMuN0M0NC40LDE1LjQsMzMuMywxOC4zLDMwLjMsMTEuMkwzMC4zLDExLjJ6Ii8+DQo8L3N2Zz4NCg=="
+
+/***/ }),
+
+/***/ "./src/audioPlay.svg":
+/*!***************************!*\
+  !*** ./src/audioPlay.svg ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNjQgNjQiPg0KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCgkuc3Qwe29wYWNpdHk6MC4yO2ZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO30NCgkuc3Qxe2ZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO2ZpbGw6I0ZGRkZGRjt9DQo8L3N0eWxlPg0KPGc+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTMyLDIuOEMxNS45LDIuOCwyLjgsMTUuOSwyLjgsMzJTMTUuOSw2MS4yLDMyLDYxLjJTNjEuMiw0OC4xLDYxLjIsMzJTNDguMSwyLjgsMzIsMi44TDMyLDIuOHoiLz4NCgk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMzIsMEMxNC4zLDAsMCwxNC4zLDAsMzJzMTQuMywzMiwzMiwzMnMzMi0xNC4zLDMyLTMyUzQ5LjcsMCwzMiwweiBNMzIsNjEuMkMxNS45LDYxLjIsMi44LDQ4LjEsMi44LDMyDQoJCVMxNS45LDIuOCwzMiwyLjhTNjEuMiwxNS45LDYxLjIsMzJTNDguMSw2MS4yLDMyLDYxLjJ6Ii8+DQoJPHBhdGggY2xhc3M9InN0MSIgZD0iTTMwLjMsMTEuMmwtMi4xLDAuNkwzNi4xLDM5Yy01LjYtMC44LTEwLjUsNC0xMC4xLDguN2MwLjEsMS42LDEuMywyLjksMiwzLjVjNCwzLjQsOS40LTAuMiwxMS4zLTUuNw0KCQljMC44LTIuMywwLjQtNC0wLjgtOC4xbC00LjktMTYuOWMyLjUtMC44LDcuNywxLDkuNCwzLjVjMS4xLDEuNiwxLjgsMy45LDEuNCw1LjhjLTAuMSwwLjUtMC40LDIsMCwxLjdjMC43LTAuNiwwLjktMS4yLDEuMy0yLjQNCgkJYzAuMy0xLjEsMC40LTIuNywwLjMtMy43QzQ0LjQsMTUuNCwzMy4zLDE4LjMsMzAuMywxMS4yTDMwLjMsMTEuMnoiLz4NCjwvZz4NCjwvc3ZnPg0K"
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return H5AudioControls; });
+/* harmony import */ var _audio_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./audio.scss */ "./src/audio.scss");
+/* harmony import */ var _audio_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_audio_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! awesome-js-funcs/judgeBasic/isString */ "./node_modules/awesome-js-funcs/judgeBasic/isString.js");
+
+
 /**
- * 判断是否字符串
- * @param str
- * @returns {boolean}
+ * H5AudioControls
+ * @param audioSrc
+ * @param context default: body
+ * @param position 'left-top'|'top-right'(default)|'right-bottom'|'left-bottom'
+ *
+ * Property:
+ * audioSrc
+ * config: {
+ *   context
+ *   position
+ *   buttonSize
+ *   picSize
+ * }
+ * audioElement: {
+ *   audioButton
+ *   audio
+ *   audioPic
+ * }
+ *
+ * Function:
+ * load
+ * play
+ * pause
+ * isPlaying
+ * _runAutoPlay
+ * _changeUI
+ * _changeUIToPlay
+ * _changeUIToPause
  */
-/* harmony default export */ __webpack_exports__["a"] = (function (str) {
-  return typeof str === 'string' && str.constructor === String;
-});
+
+var H5AudioControls =
+/*#__PURE__*/
+function () {
+  function H5AudioControls(audioSrc, _temp) {
+    var _ref = _temp === void 0 ? {} : _temp,
+        _ref$context = _ref.context,
+        context = _ref$context === void 0 ? document.body : _ref$context,
+        _ref$position = _ref.position,
+        position = _ref$position === void 0 ? 'top-right' : _ref$position,
+        _ref$buttonSize = _ref.buttonSize,
+        buttonSize = _ref$buttonSize === void 0 ? '' : _ref$buttonSize,
+        _ref$picSize = _ref.picSize,
+        picSize = _ref$picSize === void 0 ? '' : _ref$picSize;
+
+    this.config = {
+      context: Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__["default"])(context) ? document.querySelector(context) : context,
+      position: position,
+      buttonSize: Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__["default"])(buttonSize) ? buttonSize : buttonSize + 'px',
+      picSize: Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__["default"])(picSize) ? picSize : picSize + 'px'
+    };
+    this.config.context.style.position = 'relative';
+    this.audioSrc = audioSrc;
+    this.audioElement = {
+      audioButton: document.createElement('a'),
+      audio: null,
+      audioPic: null
+    };
+  }
+
+  var _proto = H5AudioControls.prototype;
+
+  _proto.load = function load() {
+    var _this = this;
+
+    return new Promise(function (resolve) {
+      _this.audioElement.audioButton.href = 'javascript:;';
+
+      _this.audioElement.audioButton.classList.add(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.musicControlWrapper, _this.config.position);
+
+      _this._initButtonSize();
+
+      _this.audioElement.audioButton.innerHTML = "\n        <span class=" + _audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.musicControl + " " + _audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.play + ">\n          <audio style=\"display: none;\" loop preload controls>\n            <source src=" + _this.audioSrc + " type=\"audio/mpeg\">\n          </audio>\n        </span>\n      ";
+
+      _this.config.context.appendChild(_this.audioElement.audioButton);
+
+      _this.audioElement.audioPic = _this.audioElement.audioButton.querySelector('.' + _audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.musicControl);
+      _this.audioElement.audio = _this.audioElement.audioPic.querySelector('audio');
+
+      _this._initAudioPic();
+
+      _this._runAutoPlay();
+
+      _this.eventBind();
+
+      setTimeout(resolve, 0);
+    });
+  };
+
+  _proto.eventBind = function eventBind() {
+    var _this2 = this;
+
+    this.audioElement.audioButton.addEventListener('click', function (e) {
+      e.stopPropagation();
+
+      if (_this2.audioElement.audioPic.classList.contains(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.play)) {
+        // 正在播放
+        _this2.pause();
+      } else {
+        // 暂停中
+        _this2.play();
+      }
+    });
+  };
+
+  _proto._initButtonSize = function _initButtonSize() {
+    if (!this.config.buttonSize) {
+      var shortW = window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth;
+      this.config.buttonSize = shortW * .15 + 'px';
+    }
+
+    this.audioElement.audioButton.style.cssText = 'width: ' + this.config.buttonSize + '; height: ' + this.config.buttonSize;
+  };
+
+  _proto._initAudioPic = function _initAudioPic() {
+    if (this.config.picSize) {
+      this.audioElement.audioPic.style.cssText = 'width: ' + this.config.picSize + '; height: ' + this.config.picSize;
+    }
+  };
+
+  _proto._runAutoPlay = function _runAutoPlay() {
+    var _this3 = this;
+
+    this.play();
+    document.addEventListener("WeixinJSBridgeReady", function () {
+      _this3.play();
+    }, false);
+    document.addEventListener('YixinJSBridgeReady', function () {
+      _this3.play();
+    }, false);
+  };
+
+  _proto.play = function play() {
+    var _this4 = this;
+
+    this.audioElement.audio.play();
+    setTimeout(function () {
+      return _this4._changeUI();
+    }, 0);
+  };
+
+  _proto.pause = function pause() {
+    var _this5 = this;
+
+    this.audioElement.audio.pause();
+    setTimeout(function () {
+      return _this5._changeUI();
+    }, 0);
+  };
+
+  _proto._changeUIToPlay = function _changeUIToPlay() {
+    this.audioElement.audioPic.classList.remove(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.pause);
+    this.audioElement.audioPic.classList.add(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.play);
+  };
+
+  _proto._changeUIToPause = function _changeUIToPause() {
+    this.audioElement.audioPic.classList.remove(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.play);
+    this.audioElement.audioPic.classList.add(_audio_scss__WEBPACK_IMPORTED_MODULE_0___default.a.pause);
+  };
+
+  _proto._changeUI = function _changeUI() {
+    if (this.isPlaying()) {
+      this._changeUIToPlay();
+    } else {
+      this._changeUIToPause();
+    }
+  };
+
+  _proto.isPlaying = function isPlaying() {
+    return !this.audioElement.audio.paused;
+  };
+
+  return H5AudioControls;
+}();
+
+
+;
 
 /***/ })
-/******/ ])["default"];
+
+/******/ })["default"];
 });
 //# sourceMappingURL=H5AudioControls.js.map
