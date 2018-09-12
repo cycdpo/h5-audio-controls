@@ -1,6 +1,8 @@
 .musicControlWrapper {
   position: absolute;
   z-index: 999;
+  max-width: 15vw;
+  max-height: 15vw;
   width: 15vw;
   height: 15vw;
   display: flex;
