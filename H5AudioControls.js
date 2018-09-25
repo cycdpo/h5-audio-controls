@@ -1,5 +1,5 @@
 /*!
- * h5-audio-controls v1.1.1
+ * h5-audio-controls v1.1.3
  * Homepage: https://github.com/cycdpo/h5-audio-controls#readme
  * Released under the MIT License.
  */
@@ -134,7 +134,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, ".src-audio__musicControlWrapper {\n  position: absolute;\n  z-index: 999;\n  width: 15vw;\n  height: 15vw;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.src-audio__musicControlWrapper.left-top {\n  left: 0;\n  top: 0;\n}\n\n.src-audio__musicControlWrapper.top-right {\n  top: 0;\n  right: 0;\n}\n\n.src-audio__musicControlWrapper.right-bottom {\n  right: 0;\n  bottom: 0;\n}\n\n.src-audio__musicControlWrapper.left-bottom {\n  left: 0;\n  bottom: 0;\n}\n\n@keyframes src-audio__reverseRotataZ {\n  from {\n    transform: rotateZ(0deg);\n  }\n  to {\n    transform: rotateZ(-360deg);\n  }\n}\n\n.src-audio__musicControl {\n  display: block;\n  width: 60%;\n  height: 60%;\n}\n\n.src-audio__musicControl.src-audio__play {\n  background: url(" + escape(__webpack_require__(/*! ./audioPlay.svg */ "./src/audioPlay.svg")) + ") no-repeat;\n  background-size: 100% 100%;\n  animation: src-audio__reverseRotataZ 2s linear infinite;\n}\n\n.src-audio__musicControl.src-audio__pause {\n  background: url(" + escape(__webpack_require__(/*! ./audioPause.svg */ "./src/audioPause.svg")) + ") no-repeat;\n  background-size: 100% 100%;\n}\n", ""]);
+exports.push([module.i, ".src-audio__musicControlWrapper {\n  position: absolute;\n  z-index: 999;\n  max-width: 15vw;\n  max-height: 15vw;\n  width: 15vw;\n  height: 15vw;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.src-audio__musicControlWrapper.left-top {\n  left: 0;\n  top: 0;\n}\n\n.src-audio__musicControlWrapper.top-right {\n  top: 0;\n  right: 0;\n}\n\n.src-audio__musicControlWrapper.right-bottom {\n  right: 0;\n  bottom: 0;\n}\n\n.src-audio__musicControlWrapper.left-bottom {\n  left: 0;\n  bottom: 0;\n}\n\n@keyframes src-audio__reverseRotataZ {\n  from {\n    transform: rotateZ(0deg);\n  }\n  to {\n    transform: rotateZ(-360deg);\n  }\n}\n\n.src-audio__musicControl {\n  display: block;\n  width: 60%;\n  height: 60%;\n}\n\n.src-audio__musicControl.src-audio__play {\n  background: url(" + escape(__webpack_require__(/*! ./audioPlay.svg */ "./src/audioPlay.svg")) + ") no-repeat;\n  background-size: 100% 100%;\n  animation: src-audio__reverseRotataZ 2s linear infinite;\n}\n\n.src-audio__musicControl.src-audio__pause {\n  background: url(" + escape(__webpack_require__(/*! ./audioPause.svg */ "./src/audioPause.svg")) + ") no-repeat;\n  background-size: 100% 100%;\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -982,6 +982,16 @@ function () {
     this.audioElement.audio.pause();
     setTimeout(function () {
       return _this5._changeUI();
+    }, 0);
+  };
+
+  _proto.stop = function stop() {
+    var _this6 = this;
+
+    this.audioElement.audio.currentTime = 0;
+    this.audioElement.audio.pause();
+    setTimeout(function () {
+      return _this6._changeUI();
     }, 0);
   };
 
