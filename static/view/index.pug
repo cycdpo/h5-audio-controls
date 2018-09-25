@@ -16,7 +16,18 @@ html(lang='en')
         background-color: #0a4f56;
       }
 
+      .stop-button {
+        display: inline-block;
+        margin: 100px;
+        padding: 10px;
+        border: 1px solid white;
+        border-radius: 4px;
+        color: white;
+      }
+
   body
+    a(href="javascript:;", class="stop-button") stop
+
     each _js in htmlWebpackPlugin.files.js
       script(src=_js)
 
@@ -27,8 +38,12 @@ html(lang='en')
 
       var
         h5AudioControls = new H5AudioControls(audioSrc)
+        , eStop = document.querySelector('.stop-button')
       ;
 
       console.log(h5AudioControls);
       h5AudioControls.load();
 
+      eStop.addEventListener('click', function () {
+        h5AudioControls.stop();
+      });
