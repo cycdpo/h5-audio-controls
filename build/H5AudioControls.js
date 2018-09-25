@@ -1,5 +1,5 @@
 /*!
- * h5-audio-controls v1.1.2
+ * h5-audio-controls v1.2.0
  * Homepage: https://github.com/cycdpo/h5-audio-controls#readme
  * Released under the MIT License.
  */
@@ -258,6 +258,16 @@ function () {
     this.audioElement.audio.pause();
     setTimeout(function () {
       return _this5._changeUI();
+    }, 0);
+  };
+
+  _proto.stop = function stop() {
+    var _this6 = this;
+
+    this.audioElement.audio.currentTime = 0;
+    this.audioElement.audio.pause();
+    setTimeout(function () {
+      return _this6._changeUI();
     }, 0);
   };
 

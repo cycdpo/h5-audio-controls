@@ -61,7 +61,8 @@
 * `H5AudioControls` instance supports the following methods:
   * `load()`: init controller.
   * `play()`: play the audio.
-  * `pause()`: pause the pause.
+  * `pause()`: pause the audio.
+  * `stop()`: stop the audio.
 
 ### Use in browser
 ```html

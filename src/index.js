@@ -141,6 +141,12 @@ export default class H5AudioControls {
     setTimeout(() => this._changeUI(), 0);
   };
 
+  stop() {
+    this.audioElement.audio.currentTime = 0;
+    this.audioElement.audio.pause();
+    setTimeout(() => this._changeUI(), 0);
+  };
+
   _changeUIToPlay() {
     this.audioElement.audioPic.classList.remove(_style.pause);
     this.audioElement.audioPic.classList.add(_style.play);
