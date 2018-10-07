@@ -1,6 +1,6 @@
 {
   "name": "h5-audio-controls",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Simple h5 music controller",
   "main": "build/H5AudioControls.js",
   "scripts": {
@@ -26,19 +26,19 @@
   },
   "homepage": "https://github.com/cycdpo/h5-audio-controls#readme",
   "devDependencies": {
-    "@babel/core": "^7.1.0",
+    "@babel/core": "^7.1.2",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "autoprefixer": "^9.1.5",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
-    "babel-loader": "^8.0.2",
-    "browser-sync": "^2.24.7",
+    "babel-loader": "^8.0.4",
+    "browser-sync": "^2.26.0",
     "browser-sync-webpack-plugin": "^2.2.2",
     "clean-webpack-plugin": "^0.1.19",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
-    "gh-pages": "^2.0.0",
+    "gh-pages": "^2.0.1",
     "gulp": "^3.9.1",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
@@ -52,10 +52,10 @@
     "uglify-js": "^3.4.9",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^1.1.1",
-    "webpack": "^4.19.1",
-    "webpack-cli": "^3.1.1"
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
   },
   "dependencies": {
-    "awesome-js-funcs": "^0.1.3"
+    "awesome-js-funcs": "^0.1.4"
   }
 }

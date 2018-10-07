@@ -57,6 +57,7 @@
       * `'left-bottom'`
   * `buttonSize`: [string|number] Set button wrapper size. Default `''`
   * `picSize`: [string|number] Set button picture size. Default `''`
+  * `autoPlay`: [boolean] Whether to play immediately after loading. Default `true`
 
 * `H5AudioControls` instance supports the following methods:
   * `load()`: init controller.

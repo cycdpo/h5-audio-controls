@@ -26,7 +26,6 @@ import isString from 'awesome-js-funcs/judgeBasic/isString';
  * play
  * pause
  * isPlaying
- * _runAutoPlay
  * _changeUI
  * _changeUIToPlay
  * _changeUIToPause
@@ -37,6 +36,7 @@ export default class H5AudioControls {
     position = 'top-right',
     buttonSize = '',
     picSize = '',
+    autoPlay = true,
   } = {}) {
     this.config = {
       context: isString(context)
@@ -45,6 +45,7 @@ export default class H5AudioControls {
       position: position,
       buttonSize: isString(buttonSize) ? buttonSize : buttonSize + 'px',
       picSize: isString(picSize) ? picSize : picSize + 'px',
+      autoPlay: autoPlay,
     };
 
     this.config.context.style.position = 'relative';
@@ -78,8 +79,12 @@ export default class H5AudioControls {
       this.audioElement.audio = this.audioElement.audioPic.querySelector('audio');
 
       this._initAudioPic();
-      this._runAutoPlay();
+      this._changeUI();
       this.eventBind();
+
+      if (this.config.autoPlay) {
+        this.play();
+      }
 
       setTimeout(resolve, 0);
     });
@@ -121,19 +126,21 @@ export default class H5AudioControls {
     }
   }
 
-  _runAutoPlay() {
-    this.play();
-    document.addEventListener("WeixinJSBridgeReady", () => {
-      this.play();
-    }, false);
-    document.addEventListener('YixinJSBridgeReady', () => {
-      this.play();
-    }, false);
-  };
-
-  play() {
+  _play() {
     this.audioElement.audio.play();
     setTimeout(() => this._changeUI(), 0);
+  }
+
+  play() {
+    const wxFakePlay = () => WeixinJSBridge.invoke('getNetworkType', {}, () => this._play(), false);
+
+    if (window.WeixinJSBridge) {
+      wxFakePlay();
+    } else {
+      document.addEventListener('WeixinJSBridgeReady', () => wxFakePlay(), false);
+    }
+
+    this._play();
   };
 
   pause() {

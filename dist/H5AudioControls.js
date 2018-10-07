@@ -1,5 +1,5 @@
 /*!
- * h5-audio-controls v1.1.3
+ * h5-audio-controls v1.3.0
  * Homepage: https://github.com/cycdpo/h5-audio-controls#readme
  * Released under the MIT License.
  */
@@ -134,7 +134,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, ".src-audio__musicControlWrapper {\n  position: absolute;\n  z-index: 999;\n  max-width: 15vw;\n  max-height: 15vw;\n  width: 15vw;\n  height: 15vw;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.src-audio__musicControlWrapper.left-top {\n  left: 0;\n  top: 0;\n}\n\n.src-audio__musicControlWrapper.top-right {\n  top: 0;\n  right: 0;\n}\n\n.src-audio__musicControlWrapper.right-bottom {\n  right: 0;\n  bottom: 0;\n}\n\n.src-audio__musicControlWrapper.left-bottom {\n  left: 0;\n  bottom: 0;\n}\n\n@keyframes src-audio__reverseRotataZ {\n  from {\n    transform: rotateZ(0deg);\n  }\n  to {\n    transform: rotateZ(-360deg);\n  }\n}\n\n.src-audio__musicControl {\n  display: block;\n  width: 60%;\n  height: 60%;\n}\n\n.src-audio__musicControl.src-audio__play {\n  background: url(" + escape(__webpack_require__(/*! ./audioPlay.svg */ "./src/audioPlay.svg")) + ") no-repeat;\n  background-size: 100% 100%;\n  animation: src-audio__reverseRotataZ 2s linear infinite;\n}\n\n.src-audio__musicControl.src-audio__pause {\n  background: url(" + escape(__webpack_require__(/*! ./audioPause.svg */ "./src/audioPause.svg")) + ") no-repeat;\n  background-size: 100% 100%;\n}\n", ""]);
+exports.push([module.i, ".src-audio__musicControlWrapper {\n  position: absolute;\n  z-index: 999;\n  max-width: 15vw;\n  max-height: 15vw;\n  width: 15vw;\n  height: 15vw;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\n  outline: none;\n  border: none;\n  touch-action: manipulation;\n  cursor: pointer;\n}\n\n.src-audio__musicControlWrapper.left-top {\n  left: 0;\n  top: 0;\n}\n\n.src-audio__musicControlWrapper.top-right {\n  top: 0;\n  right: 0;\n}\n\n.src-audio__musicControlWrapper.right-bottom {\n  right: 0;\n  bottom: 0;\n}\n\n.src-audio__musicControlWrapper.left-bottom {\n  left: 0;\n  bottom: 0;\n}\n\n@keyframes src-audio__reverseRotataZ {\n  from {\n    transform: rotateZ(0deg);\n  }\n  to {\n    transform: rotateZ(-360deg);\n  }\n}\n\n.src-audio__musicControl {\n  display: block;\n  width: 60%;\n  height: 60%;\n}\n\n.src-audio__musicControl.src-audio__play {\n  background: url(" + escape(__webpack_require__(/*! ./audioPlay.svg */ "./src/audioPlay.svg")) + ") no-repeat;\n  background-size: 100% 100%;\n  animation: src-audio__reverseRotataZ 2s linear infinite;\n}\n\n.src-audio__musicControl.src-audio__pause {\n  background: url(" + escape(__webpack_require__(/*! ./audioPause.svg */ "./src/audioPause.svg")) + ") no-repeat;\n  background-size: 100% 100%;\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -860,7 +860,6 @@ __webpack_require__.r(__webpack_exports__);
  * play
  * pause
  * isPlaying
- * _runAutoPlay
  * _changeUI
  * _changeUIToPlay
  * _changeUIToPause
@@ -878,13 +877,16 @@ function () {
         _ref$buttonSize = _ref.buttonSize,
         buttonSize = _ref$buttonSize === void 0 ? '' : _ref$buttonSize,
         _ref$picSize = _ref.picSize,
-        picSize = _ref$picSize === void 0 ? '' : _ref$picSize;
+        picSize = _ref$picSize === void 0 ? '' : _ref$picSize,
+        _ref$autoPlay = _ref.autoPlay,
+        autoPlay = _ref$autoPlay === void 0 ? true : _ref$autoPlay;
 
     this.config = {
       context: Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__["default"])(context) ? document.querySelector(context) : context,
       position: position,
       buttonSize: Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__["default"])(buttonSize) ? buttonSize : buttonSize + 'px',
-      picSize: Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__["default"])(picSize) ? picSize : picSize + 'px'
+      picSize: Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_1__["default"])(picSize) ? picSize : picSize + 'px',
+      autoPlay: autoPlay
     };
     this.config.context.style.position = 'relative';
     this.audioSrc = audioSrc;
@@ -916,9 +918,13 @@ function () {
 
       _this._initAudioPic();
 
-      _this._runAutoPlay();
+      _this._changeUI();
 
       _this.eventBind();
+
+      if (_this.config.autoPlay) {
+        _this.play();
+      }
 
       setTimeout(resolve, 0);
     });
@@ -955,25 +961,33 @@ function () {
     }
   };
 
-  _proto._runAutoPlay = function _runAutoPlay() {
+  _proto._play = function _play() {
     var _this3 = this;
 
-    this.play();
-    document.addEventListener("WeixinJSBridgeReady", function () {
-      _this3.play();
-    }, false);
-    document.addEventListener('YixinJSBridgeReady', function () {
-      _this3.play();
-    }, false);
+    this.audioElement.audio.play();
+    setTimeout(function () {
+      return _this3._changeUI();
+    }, 0);
   };
 
   _proto.play = function play() {
     var _this4 = this;
 
-    this.audioElement.audio.play();
-    setTimeout(function () {
-      return _this4._changeUI();
-    }, 0);
+    var wxFakePlay = function wxFakePlay() {
+      return WeixinJSBridge.invoke('getNetworkType', {}, function () {
+        return _this4._play();
+      }, false);
+    };
+
+    if (window.WeixinJSBridge) {
+      wxFakePlay();
+    } else {
+      document.addEventListener('WeixinJSBridgeReady', function () {
+        return wxFakePlay();
+      }, false);
+    }
+
+    this._play();
   };
 
   _proto.pause = function pause() {
