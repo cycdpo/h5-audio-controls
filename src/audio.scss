@@ -9,6 +9,12 @@
   justify-content: center;
   align-items: center;
 
+  -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+  outline: none;
+  border: none;
+  touch-action: manipulation;
+  cursor: pointer;
+
   &:global(.left-top) {
     left: 0;
     top: 0;
