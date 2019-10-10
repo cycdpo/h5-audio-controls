@@ -1,7 +1,6 @@
 # H5 Audio Controls
 
 [![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
 [![David deps][david-image]][david-url]
 [![devDependencies Status][david-dev-image]][david-dev-url]
 [![npm download][download-image]][download-url]
@@ -10,8 +9,6 @@
 
 [npm-image]: https://img.shields.io/npm/v/h5-audio-controls.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/h5-audio-controls
-[travis-image]: https://img.shields.io/travis/cycdpo/h5-audio-controls.svg?style=flat-square
-[travis-url]: https://travis-ci.org/cycdpo/h5-audio-controls
 [david-image]: https://img.shields.io/david/cycdpo/h5-audio-controls.svg?style=flat-square
 [david-url]: https://david-dm.org/cycdpo/h5-audio-controls
 [david-dev-image]: https://david-dm.org/cycdpo/h5-audio-controls/dev-status.svg?style=flat-square
@@ -22,10 +19,10 @@
 [jsdelivr-url]: https://www.jsdelivr.com/package/npm/h5-audio-controls
 [license-image]: https://img.shields.io/npm/l/h5-audio-controls.svg?style=flat-square
 
+## This package has been deprecated
+[new-url]: https://github.com/cycjimmy/h5-audio-controls
 
-* Simple h5 music controller
-
-[Releases](https://github.com/cycdpo/h5-audio-controls/releases) | [Demo](https://cycdpo.github.io/h5-audio-controls/)
+**This package has been migrated to [@cycjimmy/h5-audio-controls][new-url] for scoped NPM package. Please switch to [@cycjimmy/h5-audio-controls][new-url] to stay up to date.**
 
 ## How to use
 ### Install
